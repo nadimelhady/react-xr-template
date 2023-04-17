@@ -3,9 +3,8 @@ import { useGLTF } from "@react-three/drei";
 
 export function Model(props) {
   const group = useRef();
-  const group2 = useRef();
 
-  const { nodes, materials } = useGLTF("/3D/CryptoVreneli.gltf");
+  const { nodes, materials } = useGLTF("/CryptoVreneli.gltf");
   return (
     <group {...props} dispose={null}>
       <mesh
@@ -17,13 +16,13 @@ export function Model(props) {
         <mesh
           geometry={nodes.Chip.geometry}
           material={materials["Coin-E"]}
-          position={[-0.03, 0.38, -0.12]}
+          position={[-0.03, 0.03, -0.12]}
         />
       </mesh>
     </group>
   );
 }
 
-useGLTF.preload("/3D/CryptoVreneli.gltf");
+useGLTF.preload("/CryptoVreneli.gltf");
 
 export default Model;
