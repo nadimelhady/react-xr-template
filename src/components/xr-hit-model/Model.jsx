@@ -5,7 +5,7 @@ export function Model(props) {
   const group = useRef();
   const group2 = useRef();
 
-  const { nodes, materials } = useGLTF("/public/3D/CryptoVreneli.gltf");
+  const { nodes, materials } = useGLTF("/3D/CryptoVreneli.gltf");
   return (
     <group {...props} dispose={null}>
       <mesh
@@ -24,6 +24,6 @@ export function Model(props) {
   );
 }
 
-useGLTF.preload("/public/3D/CryptoVreneli.gltf");
+useGLTF.preload("/3D/CryptoVreneli.gltf");
 
 export default Model;
