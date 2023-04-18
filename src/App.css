@@ -47,4 +47,5 @@
 .ar-button{
   background-color: black !important;
   bottom: 50px !important;
+  z-index: 9999;
 }
