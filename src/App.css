@@ -11,6 +11,7 @@
   height: 100%;
   bottom: 5rem;
   pointer-events: none;
+  z-index: 99999;
 }
 
 .dom-container{
@@ -47,5 +48,4 @@
 .ar-button{
   background-color: black !important;
   bottom: 50px !important;
-  z-index: 9999;
 }
