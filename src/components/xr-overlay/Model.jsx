@@ -1,29 +1,44 @@
-import React, { useRef } from "react";
-import { useGLTF } from "@react-three/drei";
+import React, { useEffect, useRef } from "react";
+import { useGLTF, useAnimations } from "@react-three/drei";
+import { useCharacterAnimations } from "../../contexts/CharacterAnimations";
 
 export function Model(props) {
   const group = useRef();
-  const { nodes, materials } = useGLTF("/CryptoVreneli.gltf");
+  const { nodes, materials, animations } = useGLTF("/nadim.glb");
+  const { actions, names } = useAnimations(animations, group);
 
-  console.log({ nodes, materials });
+  const { setAnimations, animationIndex } = useCharacterAnimations();
+  console.log(names);
+
+  useEffect(() => {
+    setAnimations(names);
+  }, []);
+
+  useEffect(() => {
+    actions[names[animationIndex]].reset().fadeIn(0.5).play();
+
+    return () => {
+      actions[names[animationIndex]]?.fadeOut(0.5);
+    };
+  }, [animationIndex]);
+
   return (
-    <group {...props} dispose={null}>
-      <mesh
-        geometry={nodes.CryptoVreneli.geometry}
-        material={materials.Coin}
-        position={[0, 0.35, 0]}
-        scale={0.13}
-      >
-        <mesh
-          geometry={nodes.Chip.geometry}
-          material={materials["Coin-E"]}
-          position={[-0.03, 0.03, -0.12]}
-        />
-      </mesh>
+    <group ref={group} {...props} dispose={null}>
+      <group name="Scene">
+        <group name="Armature" rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
+          <primitive object={nodes.mixamorigHips} />
+          <skinnedMesh
+            name="Nadim_BBoy"
+            geometry={nodes.Nadim_BBoy.geometry}
+            material={materials["NadimReduced.003"]}
+            skeleton={nodes.Nadim_BBoy.skeleton}
+          />
+        </group>
+      </group>
     </group>
   );
 }
 
-useGLTF.preload("/CryptoVreneli.gltf");
+useGLTF.preload("/nadim.glb");
 
 export default Model;

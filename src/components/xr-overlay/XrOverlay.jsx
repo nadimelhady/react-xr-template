@@ -14,7 +14,7 @@ const XrOverlay = () => {
   useThree(({ camera }) => {
     if (!isPresenting) {
       camera.position.z = 3;
-      camera.position.y = -0.35;
+      camera.position.y = 2;
     }
   });
 
@@ -36,9 +36,8 @@ const XrOverlay = () => {
 
   return (
     <>
-      <OrbitControls />;{/* <ambientLight intensity={100} /> */}
-      <Environment preset="city" />
-      <directionalLight args={[1, 1, 1]} intensity={100} position={[0, 1, 7]} />
+      <OrbitControls />
+      <Environment preset="sunset" />
       {isPresenting &&
         models.map(({ position, id }) => {
           return <Model key={id} position={position} />;

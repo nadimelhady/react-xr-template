@@ -10,7 +10,7 @@ export function Model(props) {
       <mesh
         geometry={nodes.CryptoVreneli.geometry}
         material={materials.Coin}
-        position={[0, 0.35, 0]}
+        position={[0, 0.4, 0]}
         scale={0.13}
       >
         <mesh
