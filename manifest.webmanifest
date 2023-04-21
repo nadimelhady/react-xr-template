@@ -1,0 +1,16 @@
+{
+  "short_name": "AR App",
+  "name": "AR App",
+  "display": "fullscreen",
+  "start_url": "/",
+  "background_color": "#ffffff",
+  "description": "WebXR AR App with React and React XR",
+  "xr_features": [
+    {
+      "name": "dom-overlay",
+      "params": {
+        "root": "ar-ui"
+      }
+    }
+  ]
+}
