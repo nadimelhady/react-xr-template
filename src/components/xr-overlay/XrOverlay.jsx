@@ -1,6 +1,6 @@
 import { OrbitControls } from "@react-three/drei";
 import { Interactive, useHitTest, useXR } from "@react-three/xr";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Model from "./Model";
 import { useThree } from "@react-three/fiber";
 import { Environment } from "@react-three/drei";
@@ -13,10 +13,19 @@ const XrOverlay = () => {
 
   useThree(({ camera }) => {
     if (!isPresenting) {
-      camera.position.z = 3;
-      camera.position.y = 2;
+      camera.position.z = 2.5;
+      camera.position.y = 1;
     }
   });
+
+  useEffect(() => {
+    const targetCanvas = document.querySelector("div > canvas");
+    if (targetCanvas) {
+      targetCanvas.style.zIndex = "0";
+      targetCanvas.style.position = "relative";
+      targetCanvas.parentElement.style.position = "relative";
+    }
+  }, []);
 
   useHitTest((hitMatrix, hit) => {
     hitMatrix.decompose(

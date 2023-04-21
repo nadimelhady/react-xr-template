@@ -1,19 +1,17 @@
 import { Canvas } from "@react-three/fiber";
 import { ARButton, XR } from "@react-three/xr";
 import { Leva } from "leva";
-import { useCallback, useState } from "react";
+import { useEffect, useRef } from "react";
 import { CharacterAnimationsProvider } from "../../contexts/CharacterAnimations";
 import Interface from "./Interface";
 import XrOverlay from "./XrOverlay";
 
 const XrOverlayContainer = () => {
-  const [overlayContent, setOverlayContent] = useState(null);
+  const overlayContentRef = useRef();
 
-  let interfaceRef = useCallback((node) => {
-    if (node !== null) {
-      setOverlayContent(node);
-    }
-  });
+  useEffect(() => {
+    overlayContentRef.current = document.getElementById("overlay");
+  }, []);
 
   return (
     <>
@@ -21,9 +19,8 @@ const XrOverlayContainer = () => {
         <ARButton
           className="ar-button"
           sessionInit={{
-            requiredFeatures: ["hit-test"],
-            optionalFeatures: ["dom-overlay"],
-            domOverlay: { root: overlayContent },
+            requiredFeatures: ["hit-test", "dom-overlay"],
+            domOverlay: { root: overlayContentRef.current },
           }}
         />
         <Canvas>
@@ -31,8 +28,8 @@ const XrOverlayContainer = () => {
             <XrOverlay />
           </XR>
         </Canvas>
-        <Interface ref={interfaceRef} />
-        <Leva hidden={true} />
+        <Interface />
+        <Leva hidden={false} />
       </CharacterAnimationsProvider>
     </>
   );
